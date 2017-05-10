@@ -5,7 +5,9 @@
  * Date: 6.5.2017
  * Time: 16:11
  */
-require_once("D:\AppServ\www\banksystem\LogicLayer\UserManagement.php");
+session_start();
+
+require_once('../LogicLayer/UserManagement.php');
 
 $errorMeesage = "";
     if (isset($_POST["register"])) {
@@ -15,6 +17,7 @@ $errorMeesage = "";
                 $last_name = trim($_POST["last_name"]);
                 $email = trim($_POST["email"]);
                 $password = trim($_POST["password"]);
+                $password = md5($password);
                 $errorMeesage = "";
                 $result = UserManagement::insertNewUser($first_name, $last_name, $email, $password);
                 if (!$result) {
@@ -24,11 +27,10 @@ $errorMeesage = "";
         }
         header("Location: SignIn.php");
     }
-    else if (isset($_POST["login"]))
+   /* else if (isset($_POST["login"]))
     {
         header("Location: SignIn.php");
-        echo "asddsadasd";
-    }
+    }*/
 
 
 ?>
@@ -38,7 +40,7 @@ $errorMeesage = "";
 
 <head>
     <meta charset="utf-8">
-    <title>Sign Up</title>
+    <title>Bank System-User Sign Up</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -70,7 +72,7 @@ $errorMeesage = "";
                 <span class="icon-bar"></span>
             </a>
 
-            <a class="brand" href="index.html">
+            <a class="brand" href="SignIn.php">
                 Welcome to our bank system!
             </a>
 

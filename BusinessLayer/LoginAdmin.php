@@ -1,33 +1,26 @@
 <?php
+session_start();
 
-// require('db.php');
-require_once("D:\AppServ\www\banksystem\LogicLayer\UserManagement.php");
-require_once ("D:\AppServ\www\banksystem\DataLayer\connectiondb.php");
-    session_start();
-    // If form submitted, insert values into the database.
-    if (isset($_POST['email'])){
-        $conn = new connectiondb();
-        $con = $conn->getConnection();
-        $email = stripslashes($_REQUEST['email']); // removes backslashes
-        $email = mysqli_real_escape_string($con,$email); //escapes special characters in a string
-        $password = stripslashes($_REQUEST['password']);
-        $password = mysqli_real_escape_string($con,$password);
+//require_once("D:\AppServ\www\banksystem\LogicLayer\UserManagement.php");
+//require_once ("D:\AppServ\www\banksystem\DataLayer\connectiondb.php");
+    require_once("../LogicLayer/AdminManagement.php");
+    require_once ("../DataLayer/connectiondb.php");
+        if (isset($_POST['email'])) {
 
-        //Checking is user existing in the database or not
-        $query = "SELECT * FROM `admins` WHERE email='$email' and password='$password'";
-        $result = mysqli_query($con,$query) or die(mysql_error());
-        $rows = mysqli_num_rows($result);
-        if($rows==1){
-            $_SESSION['adminEmail'] = $email;
-            header("Location: ../resul.php"); // Redirect user to index.php
-
-        }else{
-            echo "<div class='form'><h3>Username/password is incorrect.</h3><br/>Click here to <a href='../BusinessLayer/LoginAdmin.php'>Login</a></div>";
+            $email = stripslashes($_REQUEST['email']); // removes backslashes
+            $password = stripslashes($_REQUEST['password']);
+            $newpassword = md5($password);
+            $rows = AdminManagement::login($email, $newpassword);
+            if ($rows == 1) {
+                $_SESSION['adminEmail'] = $email;
+                header("Location: AdminMainPage.php"); // Redirect user to index.php
+            }
+            else{
+                echo "<div class='form'><h3>Username/password is incorrect.</h3><br/>Click here to <a href='../BusinessLayer/LoginAdmin.php'>Login</a></div>";
+            }
         }
-    }else{}
-
-
-
+        else {
+        }
 ?>
 
 
@@ -37,7 +30,7 @@ require_once ("D:\AppServ\www\banksystem\DataLayer\connectiondb.php");
 
 <head>
     <meta charset="utf-8">
-    <title>Sign In</title>
+    <title>Bank System-Login Admin</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -49,7 +42,7 @@ require_once ("D:\AppServ\www\banksystem\DataLayer\connectiondb.php");
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
 
     <link href="/banksystem/css/style.css" rel="stylesheet" type="text/css">
-    <link href="/banksystem/css/pages/signin.css" rel="stylesheet" type="text/css">
+    <link href="/banksystem/css/signin.css" rel="stylesheet" type="text/css">
     <style>
         #error-msg{ display:none }
         #success-msg{ display:none }
@@ -69,7 +62,7 @@ require_once ("D:\AppServ\www\banksystem\DataLayer\connectiondb.php");
                 <span class="icon-bar"></span>
             </a>
 
-            <a class="brand" href="index.html">
+            <a class="brand" href="SignIn.php">
                 Welcome to admin panel!
             </a>
 
@@ -103,6 +96,7 @@ require_once ("D:\AppServ\www\banksystem\DataLayer\connectiondb.php");
                 <div class="login-actions">
                     <input class="button btn btn-primary btn-large" type="submit" name="btn-login" value="Login As Admin!"/>
                 </div> <!-- .actions -->
+
 
             </div> <!-- /login-fields -->
 

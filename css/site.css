@@ -5,13 +5,13 @@ html,body {
 
 body {
 	padding-top: 20px;
-	background: url('../img/bg.jpg') center top no-repeat;
+	/*background: url('../img/cinema.jpg') center top no-repeat;*/
 	background-size: cover;
 	background-attachment: fixed;
 }
 
 #dvMain {
-	width: 600px;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 15px;

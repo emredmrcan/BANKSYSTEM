@@ -6,12 +6,6 @@
  * Date: 6.5.2017
  * Time: 11:18
  */
-/*$con = mysqli_connect("localhost","root","12345678","bank_system");
-// Check connection
-if (mysqli_connect_errno())
-{
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}*/
 class connectiondb
 {
     private $servername = "localhost";
