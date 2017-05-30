@@ -7,59 +7,62 @@
  * Time: 11:28
  */
 session_start();
-require_once ('../DataLayer/connectiondb.php');
-require_once ('../LogicLayer/Ticket.php');
+
 
 class TicketManagement
 {
     public static function getTickets(){
 
+        require_once ('../DataLayer/connectiondb.php');
+        require_once ('../LogicLayer/Ticket.php');
+
         $conn= new connectiondb();
-        $query = "select * from purchased_ticket ORDER by ticked_id";
-        $result = $conn->getDataTable($query);
+        $result = $conn->getDataTable("SELECT * FROM `ticketemail` ORDER BY ticket_id");
+
         $allTickets = array();
 
         //if ($result->num_rows <= 0 ) {
+        if($result){
             while ($row = $result->fetch_assoc()) {
-                $ticketObj = new Ticket($row["ticket_id"], $row["customer"],$row["category"], NULL,NULL, $row["price"], $row["count"]);
+                $ticketObj = new Ticket($row["ticket_id"], $row["email"],$row["category"], $row["ticket_location"],$row["ticket_date"], $row["price"], $row["count"]);
                 array_push($allTickets, $ticketObj);
             }
             return $allTickets;
-        //}
+        }
+        else{
+            echo "Isler istedigimiz gibi gitmedi :) Yine mi?";
+            //throw new Exception("Database Error ");
+        }
     }
-    /*public static function insertNewUser($userFirstName,$userLastName,$userEmail,$userPassword) {
+    public static function purchasedTicket($email){
+        require_once ("../DataLayer/connectiondb.php");
+        require_once ("../LogicLayer/Ticket.php");
         $conn = new connectiondb();
-        $success = $conn->executeQuery("INSERT INTO users(user_id, first_name, last_name,email,password,date_added) VALUES (NULL, '$userFirstName', '$userLastName', '$userEmail', '$userPassword',CURRENT_DATE )");
+        $result = $conn->getDataTable("SELECT * FROM ticketemail WHERE email='$email'");
+        $allTickets = array();
+
+        while ($row = $result->fetch_assoc()){
+            $ticketObj = new Ticket($row["ticket_id"], $row["email"],$row["category"], $row["ticket_location"],$row["ticket_date"], $row["price"], $row["count"]);
+            array_push($allTickets,$ticketObj);
+        }
+        return $allTickets;
+    }
+    public static function insertNewTicket($customer,$category,$location,$date,$price,$count) {
+        require_once ("../DataLayer/connectiondb.php");
+        $conn = new connectiondb();
+        $customer2 = self::getCustomerId($customer);
+        $success = $conn->executeQuery("INSERT INTO purchased_ticket(ticket_id, customer, category,ticket_location,ticket_date,price,count) VALUES (NULL, '$customer2', '$category', '$location', '$date','$price','$count' )");
         return $success;
     }
-    public static function deleteUser($userId) {
-        $conn = new connectiondb();
-        $success = $conn->executeQuery("DELETE FROM users WHERE user_id = '$userId'");
-        return $success;
-    }
-    public static function editUser($userId,$userFirstName,$userLastName) {
-        $conn = new connectiondb();
-        $success = $conn->executeQuery("UPDATE users set first_name = '$userFirstName', last_name ='$userLastName' WHERE user_id='$userId'");
-        return $success;
-    }
-    public static function getRow($userId){
+    public static function getCustomerId($email) {
+        require_once ("../DataLayer/connectiondb.php");
         $conn = new connectiondb();
         $con = $conn->getConnection();
-        $sql = "SELECT * FROM users WHERE user_id = '$userId'";
+        $sql = "SELECT user_id FROM users WHERE email = '$email'";
         $query = mysqli_query($con,$sql);
         $row = mysqli_fetch_row($query);
         return $row;
     }
-    public static function login($email,$password){
-        $conn = new connectiondb();
-        $con = $conn->getConnection();
-        $email = mysqli_real_escape_string($con,$email);
-        $password = mysqli_real_escape_string($con,$password);
-        $sql = "SELECT * FROM users WHERE email='$email' and password='$password'";
-        $result = mysqli_query($con,$sql) or die(mysql_error());
-        $rows = mysqli_num_rows($result);
-        return $rows;
-    }*/
 }
 
 

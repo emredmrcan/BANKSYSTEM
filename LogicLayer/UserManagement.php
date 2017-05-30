@@ -7,7 +7,7 @@
  * Time: 11:28
  */
 
-
+session_start();
     class UserManagement
     {
         public static function getUsers(){
@@ -53,7 +53,7 @@
             return $row;
         }
         public static function login($email,$password){
-            require_once ("../DataLayer/connectiondb.php");
+            require_once ("DataLayer/connectiondb.php");
             $conn = new connectiondb();
             $con = $conn->getConnection();
             $email = mysqli_real_escape_string($con,$email);
@@ -62,6 +62,26 @@
             $result = mysqli_query($con,$sql) or die(mysql_error());
             $rows = mysqli_num_rows($result);
             return $rows;
+        }
+        public static function about($email){
+            require_once ("../DataLayer/connectiondb.php");
+            require_once ("../LogicLayer/User.php");
+            $conn = new connectiondb();
+            $result = $conn->getDataTable("SELECT user_id,first_name,last_name,email FROM users WHERE email='$email'");
+            $userLogin = array();
+
+            while ($row = $result->fetch_assoc()){
+                $userObj = new User($row["user_id"],$row["first_name"],$row["last_name"],$row["email"]);
+                array_push($userLogin,$userObj);
+            }
+            return $userLogin;
+        }
+        public static function editAbout($userEmail,$userName,$userSurname,$userPassword) {
+            require_once ("../DataLayer/connectiondb.php");
+            $conn = new connectiondb();
+            $userPassword = md5($userPassword);
+            $success = $conn->executeQuery("UPDATE users set first_name = '$userName', last_name ='$userSurname', email = '$userEmail', password='$userPassword'  WHERE email='$userEmail'");
+            return $success;
         }
     }
 

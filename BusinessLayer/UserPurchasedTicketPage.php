@@ -3,24 +3,24 @@ session_start();
 require_once("../LogicLayer/TicketManagement.php");
 
 
-    if(isset($_SESSION['adminEmail'])){
-        if(isset($_POST["logout"])){
+if(isset($_SESSION['email'])){
+    if(isset($_POST["logout"])){
 
-            header( "location: ../logout.php");
-        }
+        header( "location: ../logout.php");
     }
-    else{
-        echo "<script>
+}
+else{
+    echo "<script>
                     alert('Please Login Again!');
-                    window.location.href='LoginAdmin.php';
+                    window.location.href='../index.php';
                     </script>";
-    }
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <title>Bank System-Admin Page</title>
+    <title>Bank System-User Purchased Ticket Page</title>
     <link rel="stylesheet" type="text/css" href="../css/table.css">   <!-- !-->
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -48,13 +48,14 @@ require_once("../LogicLayer/TicketManagement.php");
 
 
             <table><tbody>
-            <tr>
-                <th><a class="brand" href="AdminMainPage.php">Welcome to admin panel!</th> </a>
-                <th><a class="brand" style="color: blue;" href="AdminMainPage.php">User List</a> </th>
-                <th><a class="brand" style="color: blue" href="AdminTicketPage.php">Purchased Ticket List</a></th>
-                <th><a class="brand" style="color: red; padding-left: 475px; href="href="../logout.php">Logout</a></th>
-                <!--<input class="button btn btn-primary btn-large" type="submit" onclick="location.href='../logout.php';" value="Logout!"/>!-->
-            </tr>
+                <tr>
+                    <th><a class="brand" href="UserMainPage.php">Welcome to Bank System!</a></th>
+                    <th><a class="brand" style="color: blue;" href="UserMainPage.php">Buy Ticket</a> </th>
+                    <th><a class="brand" style="color: blue" href="UserPurchasedTicketPage.php">Purchased Tickets</a></th>
+                    <th><a class="brand" style="color: red; padding-left: 330px;" href="Contact.php">Contact</a></th>
+                    <th><a class="brand" style="color: red; padding-left: 10px;" href="UserAbout.php">About</a></th>
+                    <th><a class="brand" style="color: red; padding-left: 10px;" href="../logout.php">Logout</a></th>
+                </tr>
 
 
                 </tbody></table>
@@ -82,8 +83,7 @@ require_once("../LogicLayer/TicketManagement.php");
                 <th>Count</th>
             </tr>
             <?php
-
-            $ticketList = TicketManagement::getTickets();
+            $ticketList = TicketManagement::purchasedTicket($_SESSION['email']);
             for($i = 0; $i < count($ticketList); $i++) {
                 ?>
                 <tr>

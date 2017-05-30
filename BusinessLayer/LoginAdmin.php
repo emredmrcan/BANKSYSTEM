@@ -35,14 +35,14 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <link href="/banksystem/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="/banksystem/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
 
-    <link href="/banksystem/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
 
-    <link href="/banksystem/css/style.css" rel="stylesheet" type="text/css">
-    <link href="/banksystem/css/signin.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/signin.css" rel="stylesheet" type="text/css">
     <style>
         #error-msg{ display:none }
         #success-msg{ display:none }
@@ -62,7 +62,7 @@ session_start();
                 <span class="icon-bar"></span>
             </a>
 
-            <a class="brand" href="SignIn.php">
+            <a class="brand" href="../index.php">
                 Welcome to admin panel!
             </a>
 
@@ -106,6 +106,8 @@ session_start();
 
 </div> <!-- /account-container -->
 
+<!--<script src="js/jquery-1.7.2.min.js"></script>!-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/bootstrap.js"></script>
 

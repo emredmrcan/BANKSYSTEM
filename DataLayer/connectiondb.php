@@ -12,6 +12,11 @@ class connectiondb
     private $username = "root";
     private $password = "12345678";
     private $dbname = "bank_system";
+
+    /*private $servername = "mysql.hostinger.web.tr";
+    private $username = "u489359084_emre";
+    private $password = "2012510016";
+    private $dbname = "u489359084_bank";*/
     public $connection;
 
     /**

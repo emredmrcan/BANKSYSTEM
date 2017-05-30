@@ -10,17 +10,17 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <title>Bank System-Contact</title>
-    <link rel="stylesheet" type="text/css" href="/banksystem/css/contact.css">   <!-- !-->
+    <link rel="stylesheet" type="text/css" href="../css/contact.css">   <!-- !-->
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <link href="/banksystem/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="/banksystem/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
-    <link href="/banksystem/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/font-awesome.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
 
-    <link href="/banksystem/css/style.css" rel="stylesheet" type="text/css">
-    <link href="/banksystem/css/pages/signin.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/signin.css" rel="stylesheet" type="text/css">
 
     <style>
         #error-msg{ display:none }
@@ -39,7 +39,8 @@
                     <th><a class="brand" href="UserMainPage.php">Welcome to Bank System!</a></th>
                     <th><a class="brand" style="color: blue;" href="UserMainPage.php">Buy Ticket</a> </th>
                     <th><a class="brand" style="color: blue" href="#">Purchased Tickets</a></th>
-                    <th><a class="brand" style="color: red; padding-left: 350px;" href="Contact.php">Contact</a></th>
+                    <th><a class="brand" style="color: red; padding-left: 300px;" href="Contact.php">Contact</a></th>
+                    <th><a class="brand" style="color: red; padding-left: 10px;" href="UserAbout.php">About</a></th>
                     <th><a class="brand" style="color: red; padding-left: 10px;" href="../logout.php">Logout</a></th>
                 </tr>
                 </tbody></table>

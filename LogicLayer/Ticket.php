@@ -16,15 +16,7 @@ class Ticket
     private $ticket_price;
     private $ticket_count;
 
-    /**
-     * Ticket constructor.
-     * @param $ticket_id
-     * @param $ticket_customer
-     * @param $ticket_category
-     * @param $ticket_price
-     * @param $ticket_count
-     */
-    public function __construct($ticket_id, $ticket_customer, $ticket_category,$ticket_location,$ticket_date, $ticket_price, $ticket_count)
+    public function __construct($ticket_id = NULL, $ticket_customer = NULL, $ticket_category = NULL,$ticket_location = NULL,$ticket_date = NULL, $ticket_price = NULL, $ticket_count = NULL)
     {
         $this->ticket_id = $ticket_id;
         $this->ticket_customer = $ticket_customer;

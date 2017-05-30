@@ -3,10 +3,10 @@ session_start();
 
 require_once("../LogicLayer/UserManagement.php");
 require_once ("../DataLayer/connectiondb.php");
-$error="";
-$id="0";
-$first_name="";
-$last_name="";
+    $error="";
+    $id="0";
+    $first_name="";
+    $last_name="";
     if (isset($_GET['edited'])){
         $row = UserManagement::getRow($_GET['id']);
         $id = $row[0];
@@ -14,6 +14,7 @@ $last_name="";
         $last_name = $row[2];
     }
     if(isset($_POST['btn-edit'])){
+        echo "asddsa";
         $new_name = trim($_POST["firstName"]);
         $new_surname = trim($_POST["lastName"]);
         $email = trim($_POST["email"]);
@@ -25,22 +26,23 @@ $last_name="";
                header('Refresh:0; AdminMainPage.php');
            }
     }
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <title>PHP :: 3 Tier Architecture</title>
-    <link rel="stylesheet" type="text/css" href="/banksystem/css/table.css">
+    <link rel="stylesheet" type="text/css" href="../css/table.css">
 
-    <link href="/banksystem/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="/banksystem/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
 
-    <link href="/banksystem/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
 
-    <link href="/banksystem/css/style.css" rel="stylesheet" type="text/css">
-    <link href="/banksystem/css/pages/signin.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/signin.css" rel="stylesheet" type="text/css">
     <style>
         #error-msg{ display:none }
         #success-msg{ display:none }
@@ -53,7 +55,7 @@ $last_name="";
 
         <div class="container">
 
-            <a class="brand" href="SignIn.php">
+            <a class="brand" href="../index.php">
                 Just do what you want!
             </a>
 
